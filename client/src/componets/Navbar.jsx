@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { IoIosMoon, IoMdSunny } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 function Navbar() {
-  const [dark, setDark] = useState(false);
   return (
-    <div className=" h-10 fixed  top-0 w-full ">
-      <div className=" flex justify-around items-center">
-        <h1>TaskManger</h1>
-        <button className="cursor-pointer" onClick={() => setDark(!dark)}>
-          {dark ? <IoMdSunny size={20} /> : <IoIosMoon size={20} />}
-        </button>
+    <div className=" h-10 fixed  top-0 w-full  border-b border-gray-700  ">
+      <div className=" flex justify-start px-10 pt-2 font- items-center">
+        <Link to="/" className="cursor-pointer">
+          <h1>TaskManger</h1>
+        </Link>
       </div>
     </div>
   );

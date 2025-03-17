@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addTask, deleteAllTasks, deleteOneTask, getAllTasks } from "../api/Api";
+import { addTask, deleteAllTasks, deleteOneTask, getAllTasks, updateData, GetOneTask } from "../api/Api";
 const initialState = {
     tasks: [],
     loading: false,
@@ -19,6 +19,19 @@ const getAllTasksSlice = createSlice({
                     state.tasks = action.payload
             })
             .addCase(getAllTasks.rejected, (state, action) => {
+                state.loading = false,
+                    state.error = action.error.message
+            })
+
+            .addCase(GetOneTask.pending, (state) => {
+                state.loading = true,
+                    state.error = null
+            })
+            .addCase(GetOneTask.fulfilled, (state, action) => {
+                state.loading = false,
+                    state.tasks = action.payload
+            })
+            .addCase(GetOneTask.rejected, (state, action) => {
                 state.loading = false,
                     state.error = action.error.message
             })
@@ -55,6 +68,18 @@ const getAllTasksSlice = createSlice({
                     state.tasks = action.payload
             })
             .addCase(addTask.rejected, (state, action) => {
+                state.loading = false,
+                    state.error = action.error.message
+            })
+            .addCase(updateData.pending, (state) => {
+                state.loading = true,
+                    state.error = null
+            })
+            .addCase(updateData.fulfilled, (state, action) => {
+                state.loading = false,
+                    state.tasks = action.payload
+            })
+            .addCase(updateData.rejected, (state, action) => {
                 state.loading = false,
                     state.error = action.error.message
             })

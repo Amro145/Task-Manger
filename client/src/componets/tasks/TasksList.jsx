@@ -1,27 +1,32 @@
 import React, { useEffect } from "react";
 import { FaEdit } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   deleteAllTasks,
   deleteOneTask,
   getAllTasks,
+  updateData,
 } from "../../../store/api/Api";
+import EditPage from "./EditPage";
 
 function TasksList() {
   const dispatch = useDispatch();
   const { tasks, loading } = useSelector((state) => state.taskData);
   useEffect(() => {
     dispatch(getAllTasks());
-  }, [dispatch]);
+  }, [dispatch, updateData]);
   useEffect(() => {
     !loading && console.log(tasks.AllTask);
   }, [tasks, deleteAllTasks, deleteOneTask, loading]);
   return (
-    <>
+    <div>
       {loading ? (
-        <div>loading ...</div>
+        <div className="flex justify-center h-full  items-center absolute top-0 left-1/2">
+          <span className={`loading loading-spinner  w-10`} />
+        </div>
       ) : tasks.AllTask !== undefined && tasks.AllTask.length !== 0 ? (
-        <div className="overflow-x-auto rounded-box border border-gray-700 bg-base-100 mt-10">
+        <div className="  rounded-box border border-gray-700 bg-base-100 mt-10 py-5 flex flex-col justify-center items-center gap-4 ">
           <table className="table">
             <thead>
               <tr>
@@ -34,7 +39,7 @@ function TasksList() {
             {tasks.AllTask !== undefined &&
               tasks.AllTask.length !== 0 &&
               tasks.AllTask.map((task) => (
-                <tbody key={task._id}>
+                <tbody key={task._id} className="text-xl ">
                   <tr>
                     <th>
                       <input
@@ -55,18 +60,26 @@ function TasksList() {
                       >
                         Delete
                       </button>
-                      <FaEdit size={35} className="cursor-pointer" />
+                      <Link to={`edit/${task._id}`}>
+                        <FaEdit size={35} className="cursor-pointer" />
+                      </Link>
                     </td>
                   </tr>
                 </tbody>
               ))}
           </table>
-          <button onClick={() => dispatch(deleteAllTasks())}>delete All</button>
+
+          <button
+            onClick={() => dispatch(deleteAllTasks())}
+            className=" border bg-red-400 border-gray-700 p-3 w-1/2  rounded cursor-pointer hover:bg-red-700 text-black  transition-all duration-300"
+          >
+            delete All
+          </button>
         </div>
       ) : (
-        <div>no data</div>
+        <div className=" text-5xl py-4 font-stretch-ultra-condensed"> No Task</div>
       )}
-    </>
+    </div>
   );
 }
 

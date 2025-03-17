@@ -3,7 +3,29 @@ import Tasks from "../Model/Task.model.js";
 export const GetAllTasks = async (req, res) => {
     try {
         const AllTask = await Tasks.find()
-        return res.status(200).send({ message: "hello", AllTask })
+        return res.status(200).send({ message: "Task Found", AllTask })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({ message: "error in server" })
+
+
+    }
+}
+export const GetOneTask = async (req, res) => {
+    try {
+        const id = req.params.id
+        if (!id) {
+            return res.status(404).json({ message: "Task Not Found" })
+
+        }
+        const AllTask = await Tasks.findById(id)
+        if (!AllTask) {
+            return res.status(404).json({ message: "Task Not Found" })
+
+        }
+
+        return res.status(200).send({ message: "Task Found", AllTask })
 
     } catch (error) {
         console.log(error);
@@ -18,6 +40,8 @@ export const AddTask = async (req, res) => {
         const newTask = new Tasks({ name, description, complete })
         await newTask.save()
         const AllTask = await Tasks.find()
+        console.log(name);
+        
 
         return res.status(201).json({ AllTask })
     } catch (error) {
@@ -37,7 +61,7 @@ export const updateTask = async (req, res) => {
             await updatedTask.save()
             console.log(taskId);
             const AllTask = await Tasks.find()
-
+            console.log("Update", name);
             return res.status(200).json({ AllTask })
 
         } else {
