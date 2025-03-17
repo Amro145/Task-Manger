@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { FaEdit } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllTasks } from "../../../store/api/GetAllTasks";
+import {
+  deleteAllTasks,
+  deleteOneTask,
+  getAllTasks,
+} from "../../../store/api/Api";
 
 function TasksList() {
   const dispatch = useDispatch();
@@ -9,16 +13,14 @@ function TasksList() {
   useEffect(() => {
     dispatch(getAllTasks());
   }, [dispatch]);
-  const [taskData, setTaskData] = useState([]);
   useEffect(() => {
-    setTaskData(tasks.AllTask);
-    console.log(taskData);
-  }, [tasks]);
+    !loading && console.log(tasks.AllTask);
+  }, [tasks, deleteAllTasks, deleteOneTask, loading]);
   return (
     <>
       {loading ? (
-        <div>loading...</div>
-      ) : (
+        <div>loading ...</div>
+      ) : tasks.AllTask !== undefined && tasks.AllTask.length !== 0 ? (
         <div className="overflow-x-auto rounded-box border border-gray-700 bg-base-100 mt-10">
           <table className="table">
             <thead>
@@ -31,9 +33,7 @@ function TasksList() {
             </thead>
             {tasks.AllTask !== undefined &&
               tasks.AllTask.length !== 0 &&
-              taskData !== undefined &&
-              taskData.length !== 0 &&
-              taskData.map((task) => (
+              tasks.AllTask.map((task) => (
                 <tbody key={task._id}>
                   <tr>
                     <th>
@@ -46,7 +46,13 @@ function TasksList() {
                     <td>{task.name || ""}</td>
                     <td>{task.description || ""}</td>
                     <td className="flex gap-1">
-                      <button className="btn btn-outline btn-error">
+                      <button
+                        className="btn btn-outline btn-error"
+                        onClick={() => {
+                          dispatch(deleteOneTask(task._id));
+                          console.log(task._id);
+                        }}
+                      >
                         Delete
                       </button>
                       <FaEdit size={35} className="cursor-pointer" />
@@ -55,7 +61,10 @@ function TasksList() {
                 </tbody>
               ))}
           </table>
+          <button onClick={() => dispatch(deleteAllTasks())}>delete All</button>
         </div>
+      ) : (
+        <div>no data</div>
       )}
     </>
   );

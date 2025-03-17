@@ -17,7 +17,9 @@ export const AddTask = async (req, res) => {
         const { name, description, complete } = req.body
         const newTask = new Tasks({ name, description, complete })
         await newTask.save()
-        return res.status(201).json({ newTask })
+        const AllTask = await Tasks.find()
+
+        return res.status(201).json({ AllTask })
     } catch (error) {
         return res.status(500).json(error)
 
@@ -34,7 +36,9 @@ export const updateTask = async (req, res) => {
             }, { new: true })
             await updatedTask.save()
             console.log(taskId);
-            return res.status(200).json({ updatedTask })
+            const AllTask = await Tasks.find()
+
+            return res.status(200).json({ AllTask })
 
         } else {
             return res.status(404).json({ message: "Task Not Found" })
@@ -49,10 +53,12 @@ export const updateTask = async (req, res) => {
 export const DeleteTask = async (req, res) => {
     try {
         const taskId = req.params.id
-        const task = await Tasks.findById(taskId)
+        const task = await Tasks.findById({ _id: taskId })
         if (task) {
-            await Tasks.findOneAndDelete(taskId)
-            return res.status(200).json({ message: "Deleted succufuly" })
+            await Tasks.findByIdAndDelete(taskId)
+            console.log(taskId);
+            const AllTask = await Tasks.find()
+            return res.status(200).json({ message: "Deleted succufuly", AllTask })
         } else {
             return res.status(404).json({ message: "Task Not Found" })
         }
