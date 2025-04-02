@@ -16,6 +16,7 @@ This is a full stack task manager built using the MERN stack.
 - **Express.js**: Backend framework
 - **React**: Frontend library
 - **Node.js**: Backend runtime
+- **Redux**: State management
 
 ## Installation
 
@@ -23,38 +24,38 @@ This is a full stack task manager built using the MERN stack.
    ```bash
    git clone https://github.com/Amro145/Task-Manger.git
    cd Task-Manger
+   ```
 
-    Install dependencies for the backend:
-    bash
+2. Install dependencies for the backend:
+   ```bash
+   cd backend
+   npm install
+   ```
 
-cd backend
-npm install
+3. Install dependencies for the frontend:
+   ```bash
+   cd ../frontend
+   npm install
+   ```
 
-Install dependencies for the frontend:
-bash
+4. Create a `.env` file in the backend directory and add your environment variables:
+   ```env
+   MONGO_URI=your_mongodb_uri
+   JWT_SECRET=your_jwt_secret
+   ```
 
-cd ../frontend
-npm install
+5. Start the development server:
+   ```bash
+   cd backend
+   npm run dev
+   ```
 
-Create a .env file in the backend directory and add your environment variables:
-env
+6. Start the frontend development server:
+   ```bash
+   cd ../frontend
+   npm start
+   ```
 
-MONGO_URI=your_mongodb_uri
-JWT_SECRET=your_jwt_secret
+## Usage
 
-
-Start the development server:
-bash
-
-cd backend
-npm run dev
-
-Start the frontend development server:
-bash
-
-    cd ../frontend
-    npm start
-
-Usage
-
-    Open your browser and navigate to http://localhost:3000 to access the application.
+- Open your browser and navigate to `http://localhost:3000` to access the application.
