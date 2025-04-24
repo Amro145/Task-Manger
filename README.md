@@ -1,6 +1,6 @@
 # Task Manager
 
-This is a full stack task manager built using the MERN stack.
+This is a full-stack task manager application built using the MERN stack (MongoDB, Express.js, React, Node.js). It allows users to manage tasks efficiently with features like user authentication, task assignment, and real-time updates.
 
 ## Features
 
@@ -8,7 +8,7 @@ This is a full stack task manager built using the MERN stack.
 - Task creation, editing, and deletion
 - Task assignment and management
 - Real-time updates with WebSockets
-- Responsive design
+- Responsive design for all devices
 
 ## Technologies Used
 
@@ -17,8 +17,11 @@ This is a full stack task manager built using the MERN stack.
 - **React**: Frontend library
 - **Node.js**: Backend runtime
 - **Redux**: State management
+- **Vite**: Frontend build tool
 
 ## Installation
+
+Follow these steps to set up the project locally:
 
 1. Clone the repository:
    ```bash
@@ -44,7 +47,7 @@ This is a full stack task manager built using the MERN stack.
    JWT_SECRET=your_jwt_secret
    ```
 
-5. Start the development server:
+5. Start the backend development server:
    ```bash
    cd backend
    npm run dev
@@ -59,3 +62,15 @@ This is a full stack task manager built using the MERN stack.
 ## Usage
 
 - Open your browser and navigate to `http://localhost:3000` to access the application.
+
+## Development
+
+This project uses Vite for the frontend, which provides fast development with hot module replacement (HMR). For more information on Vite, refer to the [official documentation](https://vitejs.dev/).
+
+## Contributing
+
+Contributions are welcome! Feel free to submit a pull request or open an issue for any bugs or feature requests.
+
+## License
+
+This project is licensed under the MIT License.
