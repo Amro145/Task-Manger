@@ -11,7 +11,7 @@ function AddInput() {
 
   const dispatch = useDispatch();
   return (
-    <div className=" flex items-center gap-3 mt-50">
+    <div className=" flex items-center gap-3 mt-50 w-full md:w-auto">
       <input
         type="text"
         placeholder="Add Task"
@@ -25,7 +25,6 @@ function AddInput() {
         className="btn btn-active py-1"
         onClick={() => {
           dispatch(addTask(newTask));
-          console.log(newTask);
           setNewTask(() => ({ name: "" }));
         }}
       >

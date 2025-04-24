@@ -10,7 +10,7 @@ export const GetOneTask = createAsyncThunk("task/GetOneTask", async (id) => {
     return res.data
 })
 export const deleteAllTasks = createAsyncThunk("task/deleteAllTasks", async () => {
-    await axios.delete("http://localhost:3002/task")
+    await axios.delete("http://localhost:3002/task");
 
 })
 export const deleteOneTask = createAsyncThunk("task/deleteOneTask", async (id) => {
@@ -27,7 +27,6 @@ export const updateData = createAsyncThunk(
     async ({ id, data }, { rejectWithValue }) => {
         try {
             const res = await axios.put(`http://localhost:3002/task/${id}`, data);
-            console.log("id:", id, "data:", data);
             return res.data;
         } catch (error) {
             return rejectWithValue(error.response?.data || "حدث خطأ أثناء التحديث");

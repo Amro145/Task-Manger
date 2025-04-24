@@ -7,7 +7,7 @@ import EditPage from "./componets/tasks/EditPage";
 function App() {
   return (
     <div
-      className=" min-h-screen flex flex-col justify-start   items-center bg-gradient-to-b from-black to-zinc-900"
+      className=" min-h-screen flex flex-col justify-start px-3  items-center bg-gradient-to-b from-black to-zinc-900"
     >
       <Navbar />
 

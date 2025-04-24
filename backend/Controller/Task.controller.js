@@ -59,9 +59,7 @@ export const updateTask = async (req, res) => {
                 name, description, complete
             }, { new: true })
             await updatedTask.save()
-            console.log(taskId);
             const AllTask = await Tasks.find()
-            console.log("Update", name);
             return res.status(200).json({ AllTask })
 
         } else {
@@ -80,7 +78,6 @@ export const DeleteTask = async (req, res) => {
         const task = await Tasks.findById({ _id: taskId })
         if (task) {
             await Tasks.findByIdAndDelete(taskId)
-            console.log(taskId);
             const AllTask = await Tasks.find()
             return res.status(200).json({ message: "Deleted succufuly", AllTask })
         } else {

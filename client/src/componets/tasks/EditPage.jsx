@@ -28,11 +28,11 @@ function EditPage() {
   }, [tasks.AllTask]);
 
   return (
-    <>
+    <div className="flex justify-center items-center w-full bg-black sticky top-50 p-4 bg-accent-content">
       {!loading && tasks.AllTask !== undefined ? (
-        <div className="p-5 gap-4 flex flex-col items-center   px-4 border bg-black border-gray-700 absolute top-1/2 w-1/2   z-10">
+        <div className=" gap-4 flex flex-col items-center p-4  border  border-gray-700   w-full md:w-full   ">
           <h1>Edit Page</h1>
-          <div className="forms flex flex-col gap-4 w-full items-center">
+          <div className="forms w-full md:w-2/3 flex flex-col gap-4  items-center">
             <input
               type="text"
               placeholder="Name of task"
@@ -72,7 +72,7 @@ function EditPage() {
       ) : (
         <div>loadin</div>
       )}
-    </>
+    </div>
   );
 }
 
